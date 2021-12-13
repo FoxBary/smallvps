@@ -22,4 +22,8 @@ crontab -e<br>
 <br>
 */3 * * * * sh /opt/script/cron/cleanCache.sh<br>
 */2 * * * * sh /opt/script/cron/cleanlog.sh<br>
-：wq 保存退出
+：wq 保存退出<br>
+<br>
+<br>
+<b>VPS在线一键安装代码:</b><br>
+编写中……<br>
