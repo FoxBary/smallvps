@@ -20,10 +20,10 @@ fi
 echo "正在安装基础环境..${release}"
 if [ "${release}" == "centos" ]; then
     yum update
-    yum -y install wget
+    yum -y install wget curl zip unzip screen
 else
-    apt-get update
-    apt-get -y install wget
+    apt update
+    apt -y install wget curl zip unzip screen
 fi
 
 
