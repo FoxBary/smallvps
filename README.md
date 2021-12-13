@@ -10,6 +10,9 @@ TeleGram频道:https://t.me/vmshell;<br>
 <b>手动安装说明:</b><br>
 第一步：先下载两个文件放入 /opt/script/cron 文件夹<br>
 cleanLog.sh和cleanCache.sh 两个文件的下载到Linux的这个目录<br>
+https://github.com/FoxBary/smallvps/blob/main/cleanCache.sh<br>
+https://github.com/FoxBary/smallvps/blob/main/cleanLog.sh<br>
+下载到VPS目标文件夹：/opt/script/cron（没有的话需要先创建文件夹）<br>
 <br>
 <br>
 第二步：修改权限：<br>
