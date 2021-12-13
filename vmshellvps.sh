@@ -20,10 +20,10 @@ fi
 echo "正在安装基础环境..${release}"
 if [ "${release}" == "centos" ]; then
     yum update
-    yum -y install wget curl zip unzip screen
+    yum -y install wget
 else
-    apt update
-    apt -y install wget curl zip unzip screen
+    apt-get update
+    apt-get -y install wget
 fi
 
 
@@ -42,7 +42,7 @@ echo "*/3 * * * * sh /opt/script/cron/cleanCache.sh" >> /opt/script/cron/tmp
 echo "*/2 * * * * sh /opt/script/cron/cleanlog.sh" >> /opt/script/cron/tmp
 crontab /opt/script/cron/tmp
 
-echo "VPS小内存清理工具设置完成！建议重启生效"
+echo "添加完成！"
 
 
 echo "作者:Vmshell INC"
