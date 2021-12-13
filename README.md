@@ -6,3 +6,20 @@ VPS小内存清理工具,作者:Vmshell INC,是美国怀俄明注册正规企业
 TeleGram讨论:https://t.me/vmshellhk;<br>
 TeleGram频道:https://t.me/vmshell;<br>
 提供微信/支付宝/美国PayPal支付(3日内无条件退款);<br>
+
+<b>手动安装说明:</b><br>
+第一步：先下载两个文件放入 /opt/script/cron 文件夹<br>
+cleanLog.sh和cleanCache.sh 两个文件的下载到Linux的这个目录<br>
+<br>
+<br>
+第二步：修改权限：<br>
+chmod -R 777 /opt/script/cron<br>
+<br>
+<br>
+第三步：将两句执行的话放入到计划启动中：<br>
+<br>
+crontab -e<br>
+<br>
+*/3 * * * * sh /opt/script/cron/cleanCache.sh<br>
+*/2 * * * * sh /opt/script/cron/cleanlog.sh<br>
+：wq 保存退出
