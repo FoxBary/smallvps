@@ -6,8 +6,9 @@ VPS小内存硬盘日志定时清理工具,作者:Vmshell INC,是美国怀俄明
 TeleGram讨论:https://t.me/vmshellhk;<br>
 TeleGram频道:https://t.me/vmshell;<br>
 提供微信/支付宝/美国PayPal支付(3日内无条件退款);<br>
-
-<b>手动安装说明:</b><br>
+<b>第一种：VPS在线一键安装代码:</b><br>
+bash <(curl -Lso- https://github.com/FoxBary/smallvps/blob/main/vmshellvps.sh)<br>
+<b>第二种手动安装说明:</b><br>
 第一步：先下载两个文件放入 /opt/script/cron 文件夹<br>
 cleanLog.sh和cleanCache.sh 两个文件的下载到Linux的这个目录<br>
 https://github.com/FoxBary/smallvps/blob/main/cleanCache.sh<br>
@@ -28,5 +29,4 @@ crontab -e<br>
 ：wq 保存退出<br>
 <br>
 <br>
-<b>VPS在线一键安装代码:</b><br>
-编写中……<br>
+
