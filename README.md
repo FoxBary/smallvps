@@ -8,6 +8,8 @@ TeleGram频道:https://t.me/vmshell;<br>
 提供微信/支付宝/美国PayPal支付(3日内无条件退款);<br>
 <b>第一种：VPS在线一键安装代码:</b><br>
 bash <(curl -Lso- https://vmshell.com/adpic/vmshellvps.sh) <br>
+或者： <br>
+wget -q -N --no-check-certificate https://raw.githubusercontent.com/0x6pak/shell/main/install.sh && bash install.sh <br>
 <b>第二种手动安装说明:</b><br>
 第一步：先下载两个文件放入 /opt/script/cron 文件夹<br>
 cleanLog.sh和cleanCache.sh 两个文件的下载到Linux的这个目录<br>
