@@ -95,7 +95,7 @@ fi
 
 # 显示完成信息
 echo "====================================="
-echo "脚本执行完毕，请手动输入 reboot 重启服务器"
+echo "脚本执行完毕！"
 echo "定时任务已设置，每9分钟运行一次 /opt/script/cron/cleanCache.sh"
 echo "====================================="
 
@@ -112,3 +112,21 @@ echo "TeleGram讨论: https://t.me/vmshellhk;"
 echo "TeleGram频道: https://t.me/vmshell;"
 echo "提供微信/支付宝/美国PayPal/USDT/比特币/支付(3日内无条件退款);"
 echo "====================================="
+
+# 交互式重启提示（红色和绿色搭配）
+echo ""
+echo -e "请现在确认重启服务器? [\e[31myes\e[0m/\e[32mno\e[0m]"
+read -p "输入你的选择: " choice
+
+case "$choice" in
+    [Yy][Ee][Ss]|[Yy])
+        echo "正在重启服务器..."
+        reboot
+        ;;
+    [Nn][Oo]|[Nn])
+        echo "已取消重启，脚本执行结束。"
+        ;;
+    *)
+        echo "无效输入，默认不重启。"
+        ;;
+esac
