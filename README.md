@@ -1,34 +1,37 @@
-# smallvps (VPS小内存硬盘日志定时清理工具)
-“VPS小内存硬盘日志定时清理工具”是为了针对系统如何清理VPS自动缓存，保持系统的清洁与活力的小工具，喜欢的朋友可以给我们点亮我们的小星星<br>
-VPS小内存硬盘日志定时清理工具,作者:Vmshell INC,是美国怀俄明注册正规企业，现注册有自有网络运营ASN号:147002;提供香港CMI线路高速网络云计算中心和美国云计算中心，小巧灵动的VPS为全球网络提供全方位服务，<br>
-官网订购地址:  https://vmshell.com/;<br>
-企业高速网络:  https://tototel.com/;<br>
-TeleGram讨论:https://t.me/vmshellhk;<br>
-TeleGram频道:https://t.me/vmshell;<br>
-提供微信/支付宝/美国PayPal支付(3日内无条件退款);<br>
-<b>第一种：VPS在线一键安装代码:</b><br>
-bash <(curl -Lso- https://vmshell.com/adpic/vmshellvps.sh) <br>
-或者： <br>
-wget -q -N --no-check-certificate https://raw.githubusercontent.com/0x6pak/shell/main/install.sh && bash install.sh <br>
-<b>第二种手动安装说明:</b><br>
-第一步：先下载两个文件放入 /opt/script/cron 文件夹<br>
-cleanLog.sh和cleanCache.sh 两个文件的下载到Linux的这个目录<br>
-https://github.com/FoxBary/smallvps/blob/main/cleanCache.sh<br>
-https://github.com/FoxBary/smallvps/blob/main/cleanLog.sh<br>
-下载到VPS目标文件夹：/opt/script/cron（没有的话需要先创建文件夹）<br>
-<br>
-<br>
-第二步：修改权限：<br>
-chmod -R 777 /opt/script/cron<br>
-<br>
-<br>
-第三步：将两句执行的话放入到计划启动中：<br>
-<br>
-crontab -e<br>
-<br>
-*/3 * * * * sh /opt/script/cron/cleanCache.sh<br>
-*/2 * * * * sh /opt/script/cron/cleanlog.sh<br>
-：wq 保存退出<br>
-<br>
-<br>
+登录VPS的SSH之后，执行如下代码后reboot重启服务器
+第一步：创建文件夹和文件名：
+mkdir -p /opt/script/cron && nano /opt/script/cron/cleanCache.sh
+输入如下脚本内容之后保存退出
 
+#!/bin/bash
+#description: 清除缓存
+echo "开始清除缓存"
+sync;sync;sync #写入硬盘，防止数据丢失
+chmod -R 777 /opt/script/cron #修改其文件的權限
+chmod -R 777 /var/spool/mail #修改其郵件消息的權限
+#sleep 10 #延迟10秒
+echo 1 > /proc/sys/vm/drop_caches
+echo 2 > /proc/sys/vm/drop_caches
+echo 3 > /proc/sys/vm/drop_caches
+echo "结束清除缓存"
+#description: 删除30天之前的r日志文件
+echo "删除30天之前的r日志文件"
+find /var/log -mtime +1 -type f -name \*.log | xargs rm -f
+echo "30天之前的r日志文件删除完毕"
+
+第二步：修改权限：
+chmod -R 777 /opt/script/cron
+第二步：将自动执行CRON的命令放入到计划启动中：
+crontab -e
+*/9 * * * * sh /opt/script/cron/cleanCache.sh
+保存退出，重启cron定时任务功能
+
+
+或者直接使用如下命令：
+# Cron Cleanup Script
+一键脚本用于清理缓存和日志，支持 CentOS、Ubuntu、Debian。
+
+## 在线安装
+在SSH中运行以下命令：
+
+bash <(curl -sL https://github.com/FoxBary/smallvps/blob/main/vmshellvps.sh)
