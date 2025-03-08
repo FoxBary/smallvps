@@ -41,4 +41,4 @@ crontab -e<br />
 ## 在线安装
 在SSH中运行以下命令：
 
-bash <(curl -sL https://github.com/FoxBary/smallvps/blob/main/vmshellvps.sh)
+bash <(curl -sL https://raw.githubusercontent.com/FoxBary/smallvps/main/vmshellvps.sh)
