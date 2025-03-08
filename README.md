@@ -4,7 +4,7 @@ VPS小内存硬盘日志定时清理工具,作者:Vmshell INC,是美国怀俄明
 企业高速网络: https://tototel.com/;<br />
 TeleGram讨论:https://t.me/vmshellhk;<br />
 TeleGram频道:https://t.me/vmshell;<br />
-提供微信/支付宝/美国PayPal支付(3日内无条件退款);</p>
+提供微信/支付宝/美国PayPal/USDT/比特币/支付(3日内无条件退款);</p>
 <p><img class="alignnone size-full wp-image-43181" title="images-2" src="https://linuxword.com/wp-content/uploads/2025/03/images-2.jpg" alt="images-2" width="307" height="164" /></p>
 <p>登录VPS的SSH之后，执行如下代码后reboot重启服务器<br />
 第一步：创建文件夹和文件名：<br />
