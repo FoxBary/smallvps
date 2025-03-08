@@ -3,11 +3,11 @@
 # 一键脚本：安装基础组件并配置清理缓存和日志的定时任务
 # 支持 CentOS / Ubuntu / Debian
 # 当前日期: 2025-03-08
-# 作者: VmShell INC
+# 作者: Grok 3 (xAI)
 
 # 检查是否以root用户运行
 if [ "$EUID" -ne 0 ]; then
-    echo "请以root用户运行此脚本: sudo $0"
+    echo "错误：请以root用户运行此脚本: sudo $0"
     exit 1
 fi
 
@@ -21,7 +21,13 @@ elif [ -f /etc/debian_version ]; then
     PKG_MANAGER="apt"
     SERVICE_MANAGER="systemctl"
 else
-    echo "不支持的操作系统"
+    echo "错误：不支持的操作系统"
+    exit 1
+fi
+
+# 检查网络连接
+if ! ping -c 1 google.com &> /dev/null; then
+    echo "错误：网络连接失败，请检查网络设置"
     exit 1
 fi
 
@@ -34,26 +40,26 @@ echo "====================================="
 # 更新系统包
 echo "更新系统软件包..."
 if [ "$PKG_MANAGER" = "yum" ]; then
-    yum update -y
+    yum update -y || { echo "错误：更新失败"; exit 1; }
 elif [ "$PKG_MANAGER" = "apt" ]; then
-    apt update -y && apt upgrade -y
+    apt update -y && apt upgrade -y || { echo "错误：更新失败"; exit 1; }
 fi
 
 # 安装必要组件
 echo "安装基础组件..."
 if [ "$OS" = "CentOS" ]; then
-    yum install -y curl vim wget nano screen unzip zip crontabs
+    yum install -y curl vim wget nano screen unzip zip crontabs || { echo "错误：组件安装失败"; exit 1; }
     $SERVICE_MANAGER enable crond
     $SERVICE_MANAGER start crond
 elif [ "$OS" = "Ubuntu" ] || [ "$OS" = "Debian" ]; then
-    apt install -y curl vim wget nano screen unzip zip cron
+    apt install -y curl vim wget nano screen unzip zip cron || { echo "错误：组件安装失败"; exit 1; }
     $SERVICE_MANAGER enable cron
     $SERVICE_MANAGER start cron
 fi
 
 # 创建文件夹和脚本文件
 echo "创建清理脚本..."
-mkdir -p /opt/script/cron
+mkdir -p /opt/script/cron || { echo "错误：创建目录失败"; exit 1; }
 cat > /opt/script/cron/cleanCache.sh << 'EOF'
 #!/bin/bash
 #description: 清除缓存
@@ -73,18 +79,18 @@ EOF
 
 # 修改权限
 echo "设置脚本权限..."
-chmod -R 755 /opt/script/cron
+chmod -R 755 /opt/script/cron || { echo "错误：权限设置失败"; exit 1; }
 
 # 配置定时任务
 echo "配置定时任务（每9分钟运行一次）..."
-(crontab -l 2>/dev/null; echo "*/9 * * * * sh /opt/script/cron/cleanCache.sh") | crontab -
+(crontab -l 2>/dev/null; echo "*/9 * * * * sh /opt/script/cron/cleanCache.sh") | crontab - || { echo "错误：定时任务配置失败"; exit 1; }
 
 # 重启cron服务
 echo "重启cron服务..."
 if [ "$OS" = "CentOS" ]; then
-    $SERVICE_MANAGER restart crond
+    $SERVICE_MANAGER restart crond || { echo "错误：cron服务重启失败"; exit 1; }
 elif [ "$OS" = "Ubuntu" ] || [ "$OS" = "Debian" ]; then
-    $SERVICE_MANAGER restart cron
+    $SERVICE_MANAGER restart cron || { echo "错误：cron服务重启失败"; exit 1; }
 fi
 
 # 显示完成信息
