@@ -3,7 +3,7 @@
 # 一键脚本：安装基础组件并配置清理缓存和日志的定时任务
 # 支持 CentOS / Ubuntu / Debian
 # 当前日期: 2025-03-08
-# 作者: Grok 3 (xAI)
+# 作者: VmShell INC
 
 # 检查是否以root用户运行
 if [ "$EUID" -ne 0 ]; then
