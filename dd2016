@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# 第一步：调整磁盘大小
+resize2fs -f /dev/vda1
+
+# 第二步：更新系统并安装必要的软件包
+apt -y update && apt -y install nano zip wget curl screen unzip vim xz-utils openssl gawk file && apt -y upgrade
+
+# 第三步：创建一个 screen 会话并在其中执行 BBR 安装脚本
+screen -dmS setupscreen bash -c '
+    wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh 
+    chmod +x bbr.sh 
+    ./bbr.sh
+'
+
+# 第四步：下载并执行 Windows 系统安装脚本
+wget --no-check-certificate -qO InstallNET.sh 'https://d.02es.com/InstallNET.sh' && bash InstallNET.sh -dd 'https://d.02es.com/Windows/Win_Server2016_64_Administrator_nat.ee.gz'
