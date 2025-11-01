@@ -34,7 +34,7 @@ echo "===== [2/6] 执行系统更新 ====="
 eval "$UPDATE_CMD"
 
 echo "===== [3/6] 安装基础组件 ====="
-$INSTALL_CMD nano zip wget curl screen unzip vim -y
+$INSTALL_CMD nano zip wget curl screen unzip vim cron npm -y
 
 echo "===== [4/6] 创建清理脚本 ====="
 mkdir -p /opt/script/cron
